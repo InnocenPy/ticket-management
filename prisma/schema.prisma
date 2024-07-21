@@ -9,3 +9,18 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Ticket {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(225)
+  description String   @db.Text
+  status      Status   @default(OUVERT)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Status {
+  OUVERT
+  EN_COURS
+  FERME
+}
